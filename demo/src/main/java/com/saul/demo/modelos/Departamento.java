@@ -2,6 +2,7 @@ package com.saul.demo.modelos;
 
 import jakarta.persistence.*;
 
+
 @Entity
 @Table(name = "Departamento")
 public class Departamento {
