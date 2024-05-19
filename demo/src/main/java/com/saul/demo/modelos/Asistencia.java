@@ -23,6 +23,27 @@ public class Asistencia {
     private LocalDateTime horarioInicial;
     @Column(name = "HorarioFinal", nullable = false)
     private LocalDateTime horarioFinal;
+    public int getIdAsistencia() {
+        return idAsistencia;
+    }
+    public void setIdAsistencia(int idAsistencia) {
+        this.idAsistencia = idAsistencia;
+    }
+    public LocalDateTime getHorarioInicial() {
+        return horarioInicial;
+    }
+    public void setHorarioInicial(LocalDateTime horarioInicial) {
+        this.horarioInicial = horarioInicial;
+    }
+    public LocalDateTime getHorarioFinal() {
+        return horarioFinal;
+    }
+    public void setHorarioFinal(LocalDateTime horarioFinal) {
+        this.horarioFinal = horarioFinal;
+    }
 }
+
+
+
 
 

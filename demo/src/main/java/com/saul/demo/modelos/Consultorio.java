@@ -9,10 +9,10 @@ public class Consultorio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idConsultorio")
-    private int idConsultorio;
+    private Integer idConsultorio;
 
     @Column(name = "NumeroConsultorio", nullable = false)
-    private int numeroConsultorio;
+    private Integer numeroConsultorio;
 
     @Column(name = "NombreDelDoctor", nullable = false, length = 60)
     private String nombreDelDoctor;
@@ -26,26 +26,26 @@ public class Consultorio {
     }
 
     // Constructor con parámetros
-    public Consultorio(int numeroConsultorio, String nombreDelDoctor, Departamento departamento) {
+    public Consultorio(Integer numeroConsultorio, String nombreDelDoctor, Departamento departamento) {
         this.numeroConsultorio = numeroConsultorio;
         this.nombreDelDoctor = nombreDelDoctor;
         this.departamento = departamento;
     }
 
     // Getters y Setters
-    public int getIdConsultorio() {
+    public Integer getIdConsultorio() {
         return idConsultorio;
     }
 
-    public void setIdConsultorio(int idConsultorio) {
+    public void setIdConsultorio(Integer idConsultorio) {
         this.idConsultorio = idConsultorio;
     }
 
-    public int getNumeroConsultorio() {
+    public Integer getNumeroConsultorio() {
         return numeroConsultorio;
     }
 
-    public void setNumeroConsultorio(int numeroConsultorio) {
+    public void setNumeroConsultorio(Integer numeroConsultorio) {
         this.numeroConsultorio = numeroConsultorio;
     }
 

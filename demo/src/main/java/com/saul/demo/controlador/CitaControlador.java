@@ -15,26 +15,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.saul.demo.modelos.Trabajador;
-import com.saul.demo.servicios.UsuarioServicios;
+import com.saul.demo.modelos.Cita;
+import com.saul.demo.servicios.CitaServicios;
 
 @RestController
-@RequestMapping("/trabajadores")
+@RequestMapping("/Cita")
+public class CitaControlador {
 
-public class UsuarioControlador {
     @Autowired
-    private UsuarioServicios usuarioServicios;
+    private CitaServicios citaServicios;
 
     @GetMapping
-    public List<Trabajador> list() {
-        return usuarioServicios.findAll();
+    public List<Cita> list() {
+        return citaServicios.findAll();
 
     }
 
-    @GetMapping("/{idTrabajador}")
-    public ResponseEntity<?> show(@PathVariable("idTrabajador") Integer idTrabajador) {
-        Optional<Trabajador> o = usuarioServicios.findById(idTrabajador);
+    @GetMapping("/{idCita}")
+    public ResponseEntity<?> show(@PathVariable("idCita") Integer idCita) {
+        Optional<Cita> o = citaServicios.findById(idCita);
         if (o.isPresent()) {
             return ResponseEntity.ok(o.orElseThrow());
 
@@ -44,14 +43,14 @@ public class UsuarioControlador {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> create(@RequestBody Trabajador trabajador) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioServicios.save(trabajador));
+    public ResponseEntity<?> create(@RequestBody Cita cita) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(citaServicios.save(cita));
 
     }
 
-    @PutMapping("/{idTrabajador}")
-    public ResponseEntity<?> update(@RequestBody Trabajador trabajador, @PathVariable("idTrabajador") Integer id) {
-        Optional<Trabajador> optional = usuarioServicios.update(trabajador, id);
+    @PutMapping("/{idCita}")
+    public ResponseEntity<?> update(@RequestBody Cita cita, @PathVariable("idCita") Integer id) {
+        Optional<Cita> optional = citaServicios.update(cita, id);
         if (optional.isPresent()) {
             return ResponseEntity.status(HttpStatus.CREATED).body(optional.orElseThrow());
 
@@ -59,14 +58,15 @@ public class UsuarioControlador {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{idTrabajador}")
-    public ResponseEntity<?> delete(@PathVariable("idTrabajador") Integer id) {
-        Optional<Trabajador> optional = usuarioServicios.findById(id);
+    @DeleteMapping("/{idCita}")
+    public ResponseEntity<?> delete(@PathVariable("idCita") Integer id) {
+        Optional<Cita> optional = citaServicios.findById(id);
         if (optional.isPresent()) {
-            usuarioServicios.remove(id);
+            citaServicios.remove(id);
             return ResponseEntity.noContent().build();
 
         }
         return ResponseEntity.notFound().build();
     }
+
 }

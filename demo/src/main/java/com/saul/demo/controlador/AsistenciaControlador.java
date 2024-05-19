@@ -15,26 +15,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import com.saul.demo.modelos.Asistencia;
+import com.saul.demo.servicios.AsistenciaServicios;
 
-import com.saul.demo.modelos.Trabajador;
-import com.saul.demo.servicios.UsuarioServicios;
+
 
 @RestController
-@RequestMapping("/trabajadores")
+@RequestMapping("/Asistencia")
+public class AsistenciaControlador {
 
-public class UsuarioControlador {
-    @Autowired
-    private UsuarioServicios usuarioServicios;
+
+     @Autowired
+    private AsistenciaServicios asistenciaServicios;
 
     @GetMapping
-    public List<Trabajador> list() {
-        return usuarioServicios.findAll();
+    public List<Asistencia> list() {
+        return asistenciaServicios.findAll();
 
     }
 
-    @GetMapping("/{idTrabajador}")
-    public ResponseEntity<?> show(@PathVariable("idTrabajador") Integer idTrabajador) {
-        Optional<Trabajador> o = usuarioServicios.findById(idTrabajador);
+    @GetMapping("/{idAsistencia}")
+    public ResponseEntity<?> show(@PathVariable("idAsistencia") Integer idAsistencia) {
+        Optional<Asistencia> o = asistenciaServicios.findById(idAsistencia);
         if (o.isPresent()) {
             return ResponseEntity.ok(o.orElseThrow());
 
@@ -44,14 +46,14 @@ public class UsuarioControlador {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> create(@RequestBody Trabajador trabajador) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioServicios.save(trabajador));
+    public ResponseEntity<?> create(@RequestBody Asistencia asistencia) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(asistenciaServicios.save(asistencia));
 
     }
 
-    @PutMapping("/{idTrabajador}")
-    public ResponseEntity<?> update(@RequestBody Trabajador trabajador, @PathVariable("idTrabajador") Integer id) {
-        Optional<Trabajador> optional = usuarioServicios.update(trabajador, id);
+    @PutMapping("/{idAsistencia}")
+    public ResponseEntity<?> update(@RequestBody Asistencia asistencia, @PathVariable("idAsistencia") Integer id) {
+        Optional<Asistencia> optional = asistenciaServicios.update(asistencia, id);
         if (optional.isPresent()) {
             return ResponseEntity.status(HttpStatus.CREATED).body(optional.orElseThrow());
 
@@ -59,11 +61,11 @@ public class UsuarioControlador {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{idTrabajador}")
-    public ResponseEntity<?> delete(@PathVariable("idTrabajador") Integer id) {
-        Optional<Trabajador> optional = usuarioServicios.findById(id);
+    @DeleteMapping("/{idAsistencia}")
+    public ResponseEntity<?> delete(@PathVariable("idAsistencia") Integer id) {
+        Optional<Asistencia> optional = asistenciaServicios.findById(id);
         if (optional.isPresent()) {
-            usuarioServicios.remove(id);
+            asistenciaServicios.remove(id);
             return ResponseEntity.noContent().build();
 
         }
