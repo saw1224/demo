@@ -43,7 +43,7 @@ public class AsistenciaControlador {
         }
         return ResponseEntity.notFound().build();
     }
-
+    
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> create(@RequestBody Asistencia asistencia) {
