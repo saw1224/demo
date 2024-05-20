@@ -20,7 +20,7 @@ public class Consultorio {
     @ManyToOne
     @JoinColumn(name = "departamentos_idDepartamentos", nullable = false)
     private Departamento departamento;
-
+    
     // Constructor por defecto
     public Consultorio() {
     }
