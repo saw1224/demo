@@ -32,8 +32,5 @@ public class Departamento {
    @JsonIgnoreProperties(value ="departamento")
    private List<Consultorio> consultorios;
 
-public Object getNombreDepartamento() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getNombreDepartamento'");
-}
+
 }
