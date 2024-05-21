@@ -1,77 +1,39 @@
 package com.saul.demo.modelos;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "Departamento")
 public class Departamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idDepartamentos")
     private int id;
 
-    @Column(name = "NombreDepartamento", nullable = false, length = 75)
-    private String nombreDepartamento;
+    @Column(name = "nombre", nullable = false, length = 75)
+    private String nombre;
 
-    @Column(name = "DescripciónDepartamento", nullable = false, length = 75)
-    private String descripcionDepartamento;
+    @Column(name = "descripcion", nullable = false, length = 75)
+    private String descripcion;
 
-    @Column(name = "Imagen", nullable = false, length = 500)
+    @Column(name = "Imagen", columnDefinition ="NVARCHAR(500)",  nullable = false)
     private String imagen;
 
-    // Constructor por defecto
-    public Departamento() {
-    }
+   @OneToMany(targetEntity = Consultorio.class, fetch = FetchType.LAZY, mappedBy = "departamento", cascade = CascadeType.ALL, orphanRemoval = true)
+   @JsonIgnoreProperties(value ="departamento")
+   private List<Consultorio> consultorios;
 
-    // Constructor con parámetros
-    public Departamento(String nombreDepartamento, String descripcionDepartamento, String imagen) {
-        this.nombreDepartamento = nombreDepartamento;
-        this.descripcionDepartamento = descripcionDepartamento;
-        this.imagen = imagen;
-    }
-
-    // Getters y Setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombreDepartamento() {
-        return nombreDepartamento;
-    }
-
-    public void setNombreDepartamento(String nombreDepartamento) {
-        this.nombreDepartamento = nombreDepartamento;
-    }
-
-    public String getDescripcionDepartamento() {
-        return descripcionDepartamento;
-    }
-
-    public void setDescripcionDepartamento(String descripcionDepartamento) {
-        this.descripcionDepartamento = descripcionDepartamento;
-    }
-
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
-
-    @Override
-    public String toString() {
-        return "Departamento{" +
-                "id=" + id +
-                ", nombreDepartamento='" + nombreDepartamento + '\'' +
-                ", descripcionDepartamento='" + descripcionDepartamento + '\'' +
-                ", imagen='" + imagen + '\'' +
-                '}';
-    }
+public Object getNombreDepartamento() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getNombreDepartamento'");
+}
 }

@@ -1,78 +1,36 @@
 package com.saul.demo.modelos;
 
-import jakarta.persistence.*;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "Consultorio")
 public class Consultorio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idConsultorio")
-    private Integer idConsultorio;
+    private Long id;
 
-    @Column(name = "NumeroConsultorio", nullable = false)
+    @Column(name = "numero_consultorio", nullable = false)
     private Integer numeroConsultorio;
 
-    @Column(name = "NombreDelDoctor", nullable = false, length = 60)
-    private String nombreDelDoctor;
+    @Column(name = "nombre_doctor", nullable = false, length = 60)
+    private String nombreDoctor;
 
-    @ManyToOne
-    @JoinColumn(name = "departamentos_idDepartamentos", nullable = false)
+    @ManyToOne(targetEntity = Departamento.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "departamento_id", foreignKey = @ForeignKey(name = "FK_departamento_consultorio_id"), nullable = false)
+    @JsonIgnoreProperties(value = "consultorios")
     private Departamento departamento;
     
-    // Constructor por defecto
-    public Consultorio() {
-    }
+@OneToMany(targetEntity = Cita.class, fetch = FetchType.LAZY, mappedBy = "consultorio")
+private List<Cita> citas;
 
-    // Constructor con parámetros
-    public Consultorio(Integer numeroConsultorio, String nombreDelDoctor, Departamento departamento) {
-        this.numeroConsultorio = numeroConsultorio;
-        this.nombreDelDoctor = nombreDelDoctor;
-        this.departamento = departamento;
-    }
-
-    // Getters y Setters
-    public Integer getIdConsultorio() {
-        return idConsultorio;
-    }
-
-    public void setIdConsultorio(Integer idConsultorio) {
-        this.idConsultorio = idConsultorio;
-    }
-
-    public Integer getNumeroConsultorio() {
-        return numeroConsultorio;
-    }
-
-    public void setNumeroConsultorio(Integer numeroConsultorio) {
-        this.numeroConsultorio = numeroConsultorio;
-    }
-
-    public String getNombreDelDoctor() {
-        return nombreDelDoctor;
-    }
-
-    public void setNombreDelDoctor(String nombreDelDoctor) {
-        this.nombreDelDoctor = nombreDelDoctor;
-    }
-
-    public Departamento getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
-    }
-
-    @Override
-    public String toString() {
-        return "Consultorio{" +
-                "idConsultorio=" + idConsultorio +
-                ", numeroConsultorio=" + numeroConsultorio +
-                ", nombreDelDoctor='" + nombreDelDoctor + '\'' +
-                ", departamento=" + departamento +
-                '}';
-    }
+   
 }
 

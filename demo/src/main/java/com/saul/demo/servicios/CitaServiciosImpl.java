@@ -39,9 +39,9 @@ public class CitaServiciosImpl implements CitaServicios {
        if (optional.isPresent()) {
         Cita citaDb = optional.orElseThrow();
         citaDb.setNombre(cita.getNombre());
-        citaDb.setApellidoMaterno(cita.getApellidoMaterno());
-        citaDb.setApellidoPaterno(cita.getApellidoPaterno());
-        citaDb.setFechaYHoraReservacion(cita.getFechaYHoraReservacion());
+        citaDb.setApellidomaterno(cita.getApellidomaterno());
+        citaDb.setApellidomaterno(cita.getApellidomaterno());
+        citaDb.setFechaReservacion(cita.getFechaReservacion());
         citaDb.setCorreo(cita.getCorreo());
         citaDb.setTelefono(cita.getTelefono());
         citaDb.setSintomas(cita.getSintomas());

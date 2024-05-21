@@ -37,8 +37,8 @@ public class UsuarioServicioImpl implements UsuarioServicios {
        if (optional.isPresent()) {
         Trabajador trabajadorDb = optional.orElseThrow();
         trabajadorDb.setNombre(trabajador.getNombre());
-        trabajadorDb.setApellidoMaterno(trabajador.getApellidoMaterno());
-        trabajadorDb.setApellidoPaterno(trabajador.getApellidoPaterno());
+        trabajadorDb.setApellidomaterno(trabajador.getApellidomaterno());
+        trabajadorDb.setApellidopaterno(trabajador.getApellidopaterno());
         trabajadorDb.setUsuarios(trabajador.getUsuarios());
         trabajadorDb.setPassword(trabajador.getPassword());
         trabajadorDb.setDescripcion(trabajador.getDescripcion());

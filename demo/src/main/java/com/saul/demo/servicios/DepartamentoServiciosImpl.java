@@ -34,8 +34,8 @@ public class DepartamentoServiciosImpl implements DepartamentoServicios {
         Departamento departamentoOptional = null;
         if (optional.isPresent()) {
             Departamento departamentoDb = optional.orElseThrow();
-            departamentoDb.setNombreDepartamento(departamento.getNombreDepartamento());
-            departamentoDb.setDescripcionDepartamento(departamento.getDescripcionDepartamento());
+            departamentoDb.setNombre(departamento.getNombre());
+            departamentoDb.setDescripcion(departamento.getDescripcion());
             departamentoDb.setImagen(departamento.getImagen());
             departamentoOptional = departamentoRepositorio.save(departamentoDb);
         }
