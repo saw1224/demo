@@ -1,24 +1,24 @@
 package com.saul.demo.servicios;
 
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.saul.demo.modelos.Consultorio;
 import com.saul.demo.modelos.Departamento;
 import com.saul.demo.repositorios.ConsultorioRepositorio;
 import com.saul.demo.repositorios.DepartamentoRepositorio;
-
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ConsultorioServiciosImpl implements ConsultorioServicios {
 
     @Autowired
     private ConsultorioRepositorio consultorioRepositorio;
+    @Autowired
+    private DepartamentoRepositorio departamentoRepositorio;
 
     @Override
-    @Transactional (readOnly = true)
+    @Transactional(readOnly = true)
     public List<Consultorio> findAll() {
         List<Consultorio> consultorios = (List<Consultorio>) consultorioRepositorio.findAll();
         return consultorios;
@@ -26,7 +26,7 @@ public class ConsultorioServiciosImpl implements ConsultorioServicios {
 
     @Override
     @Transactional
-    public Consultorio save(Consultorio consultorio, Long idDepartamento) {
+    public Consultorio save(Consultorio consultorio, Integer idDepartamento) {
         Consultorio consultorioMapeado = mapeaConsultorio(consultorio);
         Departamento departamento = departamentoRepositorio.findById(idDepartamento).orElseThrow();
         consultorioMapeado.setDepartamento(departamento);

@@ -17,7 +17,7 @@ public class Departamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "nombre", nullable = false, length = 75)
     private String nombre;

@@ -42,7 +42,7 @@ public class ConsultorioControlador {
     @PostMapping("/{idDepartamento}/consultorio")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> create(@RequestBody Consultorio consultorio,
-    @PathVariable (value = "idDepartamento") Long idDepartamento) {
+    @PathVariable (value = "idDepartamento") Integer idDepartamento) {
        
         
             return ResponseEntity.status(HttpStatus.CREATED).body(consultorioServicios.save(consultorio, idDepartamento));

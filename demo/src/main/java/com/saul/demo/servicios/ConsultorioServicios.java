@@ -8,5 +8,5 @@ public interface ConsultorioServicios {
 
     List<Consultorio> findAll();
     
-    Consultorio save(Consultorio consultorio, Long idDepartamento);
+    Consultorio save(Consultorio consultorio, Integer idDepartamento);
 }

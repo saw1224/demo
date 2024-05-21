@@ -15,7 +15,7 @@ public class Consultorio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "numero_consultorio", nullable = false)
     private Integer numeroConsultorio;
