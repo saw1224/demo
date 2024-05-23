@@ -47,7 +47,7 @@ public class Trabajador {
 })
 private List<Asistencia> asistencia;
 
-@ManyToMany(targetEntity = Asistencia.class, fetch = FetchType.LAZY)
+@ManyToMany(targetEntity = Rol.class, fetch = FetchType.LAZY)
 @JoinTable(name = "trabajador_rol", joinColumns = @JoinColumn(name = "trabajador", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_trabajador_rol_id")), inverseJoinColumns = @JoinColumn(name = "rol",referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_rol_id")), uniqueConstraints = {@UniqueConstraint(columnNames = {"trabajador", "rol"},name = "uk_trabajador_rol") }, indexes = {
 
     @Index(columnList = "trabajador, rol", name = "idx_trabajador_rol")

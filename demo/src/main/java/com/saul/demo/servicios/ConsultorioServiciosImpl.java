@@ -18,7 +18,6 @@ public class ConsultorioServiciosImpl implements ConsultorioServicios {
     private DepartamentoRepositorio departamentoRepositorio;
 
     @Override
-    @Transactional(readOnly = true)
     public List<Consultorio> findAll() {
         List<Consultorio> consultorios = (List<Consultorio>) consultorioRepositorio.findAll();
         return consultorios;
