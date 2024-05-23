@@ -20,7 +20,7 @@ public class Consultorio {
     @Column(name = "numero_consultorio", nullable = false)
     private Integer numeroConsultorio;
 
-    @Column(name = "nombre_doctor", nullable = false, length = 60)
+    @Column(name = "nombre_doctor", nullable = false, length = 80)
     private String nombreDoctor;
 
     @ManyToOne(targetEntity = Departamento.class)

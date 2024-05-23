@@ -22,7 +22,7 @@ public class Departamento {
     @Column(name = "nombre", nullable = false, length = 75)
     private String nombre;
 
-    @Column(name = "descripcion", nullable = false, length = 75)
+    @Column(name = "descripcion", nullable = false, length = 500)
     private String descripcion;
 
     @Column(name = "Imagen", columnDefinition ="NVARCHAR(500)",  nullable = false)

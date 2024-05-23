@@ -36,7 +36,7 @@ public class Cita {
     @Column(name = "telefono",columnDefinition = "CHAR(10)", nullable = false, length = 10)
     private String telefono;
 
-    @Column(name = "sintomas", nullable = false, length = 500)
+    @Column(name = "sintomas", nullable = false, length = 700)
     private String sintomas;
 
     @ManyToOne(targetEntity = Consultorio.class)
