@@ -43,9 +43,11 @@ public class CitaControlador {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping
+    @PostMapping("/{idConsultoio}/Cita")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> create(@RequestBody Cita cita) {
+    public ResponseEntity<?> create(@RequestBody Cita cita, 
+    @PathVariable("idConsultorio") Integer idConsultoio) {
+
         return ResponseEntity.status(HttpStatus.CREATED).body(citaServicios.save(cita));
 
     }
