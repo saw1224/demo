@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,12 +33,11 @@ public class CitaControlador {
 
     }
 
-
     @PostMapping("/{idConsultorio}/Cita")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> create(@RequestBody Cita cita,
 
-    @PathVariable(value = "idConsultorio") Integer idConsultoio) {
+            @PathVariable(value = "idConsultorio") Integer idConsultoio) {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(citaServicios.save(cita, idConsultoio));
 
@@ -45,17 +45,34 @@ public class CitaControlador {
 
     @PutMapping("/{idCita}")
 
-public ResponseEntity<?> update (@RequestBody Cita cita, @PathVariable(value = "idCita") Integer idCita) {
+    public ResponseEntity<?> update(@RequestBody Cita cita, @PathVariable(value = "idCita") Integer idCita) {
 
-Optional<Cita> citaOptional = citaServicios.update(cita, idCita);
+        Optional<Cita> citaOptional = citaServicios.update(cita, idCita);
 
-if (citaOptional.isPresent()) {
+        if (citaOptional.isPresent()) {
 
-return ResponseEntity.status (HttpStatus.CREATED).body(citaOptional.orElseThrow());
+            return ResponseEntity.status(HttpStatus.CREATED).body(citaOptional.orElseThrow());
 
-}
+        }
 
-return ResponseEntity.notFound().build();
-}
-    
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{idCita}")
+
+    public ResponseEntity<?> remove(@PathVariable(value = "idCita") Integer idCita) {
+
+        Optional<Cita> citaOptional = citaServicios.findById(idCita);
+
+        if (citaOptional.isPresent()) {
+
+            citaServicios.remove(idCita);
+
+            return ResponseEntity.noContent().build();
+
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
 }
