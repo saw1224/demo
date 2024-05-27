@@ -23,7 +23,7 @@ public class Consultorio {
     @Column(name = "nombre_doctor", nullable = false, length = 80)
     private String nombreDoctor;
 
-    @ManyToOne(targetEntity = Departamento.class)
+    @ManyToOne(targetEntity = Departamento.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "departamento_id", foreignKey = @ForeignKey(name = "FK_departamento_consultorio_id"), nullable = false)
     @JsonIgnoreProperties(value = "consultorios")
     private Departamento departamento;

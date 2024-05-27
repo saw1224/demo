@@ -1,5 +1,8 @@
 package com.saul.demo.modelos;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,13 +25,13 @@ public class Cita {
     private String nombre;
 
     @Column(name = "apellido_paterno", nullable = false, length = 50)
-    private String apellidopaterno;
+    private String apellidoPaterno;
 
     @Column(name = "apellido_materno", nullable = false, length = 50)
-    private String apellidomaterno;
+    private String apellidoMaterno;
 
     @Column(name = "fecha_reservacion", columnDefinition = "DATETIME", nullable = false)
-    private LocalDate fechaReservacion;
+    private LocalDateTime fechaReservacion;
 
     @Column(name = "Correo", nullable = false, length = 300)
     private String correo;
@@ -39,8 +42,9 @@ public class Cita {
     @Column(name = "sintomas", nullable = false, length = 700)
     private String sintomas;
 
-    @ManyToOne(targetEntity = Consultorio.class)
+    @ManyToOne(targetEntity = Consultorio.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "idConsultorio",foreignKey = @ForeignKey(name = "FK_consultorio_cita_id"), nullable = false)
+    @JsonIgnoreProperties(value = "citas")
     private Consultorio consultorio;
 
    

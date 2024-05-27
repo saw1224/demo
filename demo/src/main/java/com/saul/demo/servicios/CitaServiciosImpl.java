@@ -7,55 +7,82 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.saul.demo.modelos.Cita;
-
+import com.saul.demo.modelos.Consultorio;
 import com.saul.demo.repositorios.CitaRepositorio;
+import com.saul.demo.repositorios.ConsultorioRepositorio;
 
 
 @Service
 public class CitaServiciosImpl implements CitaServicios {
     @Autowired
     private CitaRepositorio citaRepositorio;
+    @Autowired
+    private ConsultorioRepositorio consultorioRepositorio;
 
     @Override
     public List<Cita> findAll() {
-        List<Cita> cita = (List<Cita>) citaRepositorio.findAll();
-        return cita;
+        return (List<Cita>) citaRepositorio.findAll();
     }
 
     @Override
-    public Cita save(Cita cita) {
-        return (Cita) citaRepositorio.save(cita);
+    public Cita save(Cita cita, Integer idConsultorio) {
+        Cita citaMapeada = mapeaCita(cita);
+        Consultorio consultorio = consultorioRepositorio.findById(idConsultorio).orElseThrow();
+        citaMapeada.setConsultorio(consultorio);
+        Cita citaGuardada = citaRepositorio.save(citaMapeada);
+        return (Cita) citaRepositorio.save(citaGuardada);
     }
+private Cita mapeaCita (Cita cita) {
 
-    @Override
-    public Optional<Cita> findById(Integer id) {
-        return citaRepositorio.findById(id);
-    }
+Cita citaMapeada = new Cita();
 
-   @Override
-    public Optional<Cita> update(Cita cita, Integer id) {
-       Optional<Cita> optional = citaRepositorio.findById(id);
-       Cita citaOptional = null;
-       if (optional.isPresent()) {
-        Cita citaDb = optional.orElseThrow();
-        citaDb.setNombre(cita.getNombre());
-        citaDb.setApellidomaterno(cita.getApellidomaterno());
-        citaDb.setApellidomaterno(cita.getApellidomaterno());
-        citaDb.setFechaReservacion(cita.getFechaReservacion());
-        citaDb.setCorreo(cita.getCorreo());
-        citaDb.setTelefono(cita.getTelefono());
-        citaDb.setSintomas(cita.getSintomas());
-        
+citaMapeada.setNombre(cita.getNombre());
 
-        citaOptional = citaRepositorio.save(citaDb);
-       }
-       return Optional.ofNullable(citaOptional);
-    }
+citaMapeada.setApellidoPaterno(cita.getApellidoPaterno()); 
 
-    @Override
-    public void remove(Integer id) {
+citaMapeada.setApellidoMaterno(cita.getApellidoMaterno());
 
-        citaRepositorio.deleteById(id);
+citaMapeada.setFechaReservacion(cita.getFechaReservacion());
 
-    }
+citaMapeada.setTelefono(cita.getTelefono());
+
+citaMapeada.setCorreo(cita.getCorreo());
+
+citaMapeada.setSintomas (cita.getSintomas());
+
+return citaMapeada;
+
+}
+
+@Override
+
+public Optional<Cita> update (Cita cita, Integer idCita) {
+
+Optional<Cita> citaOptional = citaRepositorio.findById(idCita);
+
+Cita citaActualizada = null;
+
+if (citaOptional.isPresent()) {
+
+Cita citaGuardada = citaOptional.orElseThrow();
+
+citaGuardada.setNombre (cita.getNombre());
+
+  citaGuardada.setApellidoPaterno(cita.getApellidoPaterno());
+  citaGuardada.setApellidoMaterno(cita.getApellidoMaterno());
+  citaGuardada.setFechaReservacion(cita.getFechaReservacion());
+  citaGuardada.setTelefono(cita.getTelefono());
+  citaGuardada.setSintomas (cita.getSintomas());
+
+citaActualizada = citaRepositorio.save(citaGuardada);
+
+
+}
+
+return Optional.ofNullable (citaActualizada);
+}
+
+
+
+
 }

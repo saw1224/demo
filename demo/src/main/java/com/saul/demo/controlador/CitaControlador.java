@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,44 +32,30 @@ public class CitaControlador {
 
     }
 
-    @GetMapping("/{idCita}")
-    public ResponseEntity<?> show(@PathVariable("idCita") Integer idCita) {
-        Optional<Cita> o = citaServicios.findById(idCita);
-        if (o.isPresent()) {
-            return ResponseEntity.ok(o.orElseThrow());
 
-        }
-        return ResponseEntity.notFound().build();
-    }
-
-    @PostMapping("/{idConsultoio}/Cita")
+    @PostMapping("/{idConsultorio}/Cita")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> create(@RequestBody Cita cita, 
-    @PathVariable("idConsultorio") Integer idConsultoio) {
+    public ResponseEntity<?> create(@RequestBody Cita cita,
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(citaServicios.save(cita));
+    @PathVariable(value = "idConsultorio") Integer idConsultoio) {
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(citaServicios.save(cita, idConsultoio));
 
     }
 
     @PutMapping("/{idCita}")
-    public ResponseEntity<?> update(@RequestBody Cita cita, @PathVariable("idCita") Integer id) {
-        Optional<Cita> optional = citaServicios.update(cita, id);
-        if (optional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(optional.orElseThrow());
 
-        }
-        return ResponseEntity.notFound().build();
-    }
+public ResponseEntity<?> update (@RequestBody Cita cita, @PathVariable(value = "idCita") Integer idCita) {
 
-    @DeleteMapping("/{idCita}")
-    public ResponseEntity<?> delete(@PathVariable("idCita") Integer id) {
-        Optional<Cita> optional = citaServicios.findById(id);
-        if (optional.isPresent()) {
-            citaServicios.remove(id);
-            return ResponseEntity.noContent().build();
+Optional<Cita> citaOptional = citaServicios.update(cita, idCita);
 
-        }
-        return ResponseEntity.notFound().build();
-    }
+if (citaOptional.isPresent()) {
 
+return ResponseEntity.status (HttpStatus.CREATED).body(citaOptional.orElseThrow());
+
+}
+
+return ResponseEntity.notFound().build();
+}
+    
 }

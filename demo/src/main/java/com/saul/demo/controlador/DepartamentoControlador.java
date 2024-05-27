@@ -51,7 +51,7 @@ public class DepartamentoControlador {
 
     }
 
-    @PutMapping("/{idDepartamenos}")
+    @PutMapping("/{idDepartamentos}")
     public ResponseEntity<?> update(@RequestBody Departamento departamento,
             @PathVariable("idDepartamentos") Integer id) {
         Optional<Departamento> optional = departamentoServicios.update(departamento, id);
