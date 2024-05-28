@@ -33,6 +33,18 @@ public class CitaControlador {
 
     }
 
+    @GetMapping("/{idCita}")
+    public ResponseEntity<?> get(@PathVariable("idCita") Integer idCita) {
+        Optional<Cita> cita = citaServicios.findById(idCita);
+        if (cita.isPresent()) {
+            return ResponseEntity.ok().body(cita.orElseThrow());
+        }
+return ResponseEntity.notFound().build();
+
+    }
+
+    
+
     @PostMapping("/{idConsultorio}/Cita")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> create(@RequestBody Cita cita,
@@ -57,6 +69,8 @@ public class CitaControlador {
 
         return ResponseEntity.notFound().build();
     }
+
+
 
     @DeleteMapping("/{idCita}")
 
